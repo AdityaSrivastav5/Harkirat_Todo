@@ -11,6 +11,6 @@
  })
 
  module.exports = {
-     createTodo,
-     updateTodo 
+     createTodo : createTodo,
+     updateTodo : updateTodo 
  }

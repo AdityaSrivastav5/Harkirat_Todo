@@ -1,4 +1,5 @@
 const express = require("express");
+const { createTodo } = require("./types");
 const port = 4002;
 
 
@@ -8,7 +9,15 @@ app.use(express.json());
 
 
 app.post("/todo", (req, res) => {
-  res.send("Hello World!");
+  const createPayload = req.body;
+  const parsePayload = createTodo.safeParse(createPayload);
+  if(!parsePayload.success){
+    res.status(411).json({
+      msg : "tou have sent the wrong input "
+    })
+    return;
+  }
+  
 });
 
 app.get("/todos", (req, res) => {
@@ -16,7 +25,14 @@ app.get("/todos", (req, res) => {
   });
 
 app.put("/completed", (req,res)=> {
-
+  const updatePayload = req.body;
+  const parsePayload = updateTodo.safeParse(updatePayload);
+  if(!parsePayload.success){
+    res.status(411).json({
+      msg : "tou have sent the wrong input "
+    })
+    return;
+  } 
 });
 
 app.listen(port,()=>console.log(`Server started at Port ${port}`));
