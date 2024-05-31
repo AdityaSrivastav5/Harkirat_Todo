@@ -1,6 +1,7 @@
 const express = require("express");
 const { createTodo } = require("./types");
 const { todo } = require("./db");
+const cors = require("cors");
 const port = 4002;
 
 
@@ -8,6 +9,12 @@ const app = express();
 
 app.use(express.json());
 
+app.use(cors())
+
+
+app.get("/", async (req, res) => {
+  res.send("Hi ji Chai Coffee Kuch lenge?????"); 
+});
 
 app.post("/todo", async (req, res) => {
   const createPayload = req.body;
